@@ -7,7 +7,7 @@ const TimersDashboard = () => {
         <div className="ui three column centered grid">
             <div className="column">
                 <EditableTimerList />
-                <ToggleableTimerForm />
+                <ToggleableTimerForm isOpen={ true } />
             </div>
         </div>
     );
