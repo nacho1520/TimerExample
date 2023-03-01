@@ -1,6 +1,7 @@
 import React from "react";
 
 const TimerForm = props => {
+    const submitText = props.title ? 'Update' : 'Create';
     return(
         <div className="ui centered card">
             <div>
