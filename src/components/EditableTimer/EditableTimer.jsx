@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Timer from "../Timer/Timer";
 import TimerForm from "../TimerForm/TimerForm";
 
 const EditableTimer = props => {
-    if(props.editFormOpen) {
+    const [ editFormOpen, setEditFormOpen ] = useState(null);
+
+    useEffect(() => {
+        setEditFormOpen(false);
+    }, []);
+
+    if(editFormOpen) {
         return(
             <TimerForm
+                id = { props.id }
                 title = { props.title }
                 project = { props.project }
             />
@@ -13,6 +20,7 @@ const EditableTimer = props => {
     } else {
         return(
             <Timer 
+                id = { props.id }
                 title = { props.title }
                 project = { props.project }
                 elapsed = { props.elapsed }

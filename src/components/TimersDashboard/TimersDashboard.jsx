@@ -4,7 +4,7 @@ import ToggleableTimerForm from "../ToggleableTimerForm/ToggleableTimerForm";
 import uuid from "react-uuid";
 
 const TimersDashboard = () => {
-    const [ timers, setTimers ] = useState();
+    const [ timers, setTimers ] = useState([]);
 
     useEffect(() => {
         const staticTimers = [
