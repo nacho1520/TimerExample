@@ -28,7 +28,7 @@ const EditableTimer = props => {
     const handleFormSubmit = timer => {
         props.onFormSubmit(timer);
         closeForm();
-    }
+    };
 
     if(editFormOpen) {
         return(
@@ -49,6 +49,7 @@ const EditableTimer = props => {
                 elapsed = { props.elapsed }
                 runningSince = { props.runningSince }
                 onEditClick = { handleEditClick }
+                onTrashClick = { props.onTrashClick }
             />
         );
     }

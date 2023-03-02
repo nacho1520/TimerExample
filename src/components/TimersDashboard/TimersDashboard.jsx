@@ -35,6 +35,10 @@ const TimersDashboard = () => {
         updateTimer(timer);
     };
 
+    const handleTrashClick = timerId => {
+        deleteTimer(timerId);
+    }
+
     const createTimer = timer => {
         const newTimer = helpers.newTimer(timer);
         setTimers( timers.concat(newTimer) );
@@ -53,10 +57,14 @@ const TimersDashboard = () => {
         }));
     };
 
+    const deleteTimer = timerId => {
+        setTimers( timers.filter(t => t.id !== timerId) );
+    };
+
     return(
         <div className="ui three column centered grid">
             <div className="column">
-                <EditableTimerList timers={ timers } onFormSubmit= { handleEditFormSubmit } />
+                <EditableTimerList timers={ timers } onFormSubmit= { handleEditFormSubmit } onTrashClick={ handleTrashClick } />
                 <ToggleableTimerForm onFormSubmit={ handleCreateFormSubmit } />
             </div>
         </div>

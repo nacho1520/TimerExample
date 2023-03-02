@@ -3,6 +3,11 @@ import * as helpers from '../../helpers/helpers';
 
 const Timer = props => {
     const elapsedString = helpers.renderElapsed(props.elapsed);
+
+    const handleTrashClick = () => {
+        props.onTrashClick(props.id);
+    };
+
     return(
         <div className="ui centered card">
             <div className="content">
@@ -21,7 +26,7 @@ const Timer = props => {
                     <span className="rigth floated edit icon" onClick={ props.onEditClick }>
                         <i className="edit icon" /> 
                     </span>
-                    <span className="rigth floated trash icon">
+                    <span className="rigth floated trash icon" onClick={ handleTrashClick }>
                         <i className="trash icon" />
                     </span>
                 </div>
