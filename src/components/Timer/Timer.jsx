@@ -18,7 +18,7 @@ const Timer = props => {
                     </h2>
                 </div>
                 <div className="extra content">
-                    <span className="rigth floated edit icon">
+                    <span className="rigth floated edit icon" onClick={ props.onEditClick }>
                         <i className="edit icon" /> 
                     </span>
                     <span className="rigth floated trash icon">

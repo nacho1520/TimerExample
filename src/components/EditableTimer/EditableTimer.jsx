@@ -9,12 +9,35 @@ const EditableTimer = props => {
         setEditFormOpen(false);
     }, []);
 
+    const openForm = () => {
+        setEditFormOpen(true);
+    };
+
+    const closeForm = () => {
+        setEditFormOpen(false);
+    };
+
+    const handleEditClick = () => {
+        openForm();
+    };
+
+    const handleFormClose = () => {
+        closeForm();
+    };
+
+    const handleFormSubmit = timer => {
+        props.onFormSubmit(timer);
+        closeForm();
+    }
+
     if(editFormOpen) {
         return(
             <TimerForm
                 id = { props.id }
                 title = { props.title }
                 project = { props.project }
+                onFormClose = { handleFormClose }
+                onFormSubmit = { handleFormSubmit }
             />
         );
     } else {
@@ -25,6 +48,7 @@ const EditableTimer = props => {
                 project = { props.project }
                 elapsed = { props.elapsed }
                 runningSince = { props.runningSince }
+                onEditClick = { handleEditClick }
             />
         );
     }

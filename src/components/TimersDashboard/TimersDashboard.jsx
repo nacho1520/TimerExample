@@ -31,15 +31,32 @@ const TimersDashboard = () => {
         createTimer(timer);
     };
 
+    const handleEditFormSubmit = timer => {
+        updateTimer(timer);
+    };
+
     const createTimer = timer => {
         const newTimer = helpers.newTimer(timer);
         setTimers( timers.concat(newTimer) );
     };
 
+    const updateTimer = timer => {
+        setTimers( timers.map( t => {
+            if( t.id === timer.id ) { 
+                return Object.assign({ }, t, {
+                    title: timer.title,
+                    project: timer.project
+                });
+            } else {
+                return t;
+            }
+        }));
+    };
+
     return(
         <div className="ui three column centered grid">
             <div className="column">
-                <EditableTimerList timers={ timers } />
+                <EditableTimerList timers={ timers } onFormSubmit= { handleEditFormSubmit } />
                 <ToggleableTimerForm onFormSubmit={ handleCreateFormSubmit } />
             </div>
         </div>
