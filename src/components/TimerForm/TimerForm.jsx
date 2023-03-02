@@ -9,14 +9,22 @@ const TimerForm = props => {
     const handleTitleChange = e => {
         const updateState = Object.assign({}, state, { title: e.target.value });
         setState(updateState);
-    }
+    };
 
     const handleProjectChange = e => {
         const updateState = Object.assign({}, state, { project: e.target.value });
         setState(updateState);
-    }
+    };
 
-    const submitText = props.title ? 'Update' : 'Create';
+    const handleSubmit = () => {
+        props.onFormSubmit({
+            id: props.id,
+            title: state.title,
+            project: state.project
+        });
+    };
+
+    const submitText = props.id ? 'Update' : 'Create';
     return(
         <div className="ui centered card">
             <div className="content">
@@ -25,19 +33,19 @@ const TimerForm = props => {
                         <label>
                             Title
                         </label>
-                        <input type='text' value={ state.title } onChange={handleTitleChange} />
+                        <input type='text' value={ state.title } onChange={ handleTitleChange } />
                     </div>
                     <div className="field">
                         <label>
                             Project
                         </label>
-                        <input type='text' value={ state.project } onChange={handleProjectChange} />
+                        <input type='text' value={ state.project } onChange={ handleProjectChange } />
                     </div>
                     <div className="ui two bottom attached buttons">
-                        <button className="ui basic blue button">
+                        <button className="ui basic blue button" onClick={ handleSubmit }>
                             { submitText }
                         </ button>
-                        <button className="ui basic red button">
+                        <button className="ui basic red button" onClick={ props.onFormClose }>
                             Cancel
                         </button>
                     </div>

@@ -1,3 +1,5 @@
+const { v4: uuidv4 } = require('uuid');
+
 export const renderElapsed = elapsed => {
     const seconds = Math.floor(( elapsed / 1000 ) % 60);
     const minutes = Math.floor(( elapsed / 1000 / 60) % 60);
@@ -9,3 +11,12 @@ export const renderElapsed = elapsed => {
         seconds.toString().padStart(2, '0')
     ].join(":");
 }
+
+export const newTimer = timer => {
+    return {
+        id: uuidv4(),
+        title: timer.title,
+        project: timer.project,
+        elapsed: 0
+    };
+} 

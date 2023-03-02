@@ -10,11 +10,23 @@ const ToggleableTimerForm = props => {
 
     const handleFormOpen = () => {
         setIsOpen(true);
-    }
+    };
+
+    const handleFormClose = () => {
+        setIsOpen(false);
+    };
+
+    const handleFormSubmit = timer => {
+        props.onFormSubmit(timer);
+        setIsOpen(false);
+    };
 
     if(isOpen) {
         return(
-            <TimerForm />
+            <TimerForm
+                onFormClose={ handleFormClose }
+                onFormSubmit={ handleFormSubmit } 
+            />
         );
     } else {
         return(
