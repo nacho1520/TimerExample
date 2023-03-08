@@ -1,9 +1,17 @@
 const { v4: uuidv4 } = require('uuid');
 
-export const renderElapsed = elapsed => {
-    const seconds = Math.floor(( elapsed / 1000 ) % 60);
-    const minutes = Math.floor(( elapsed / 1000 / 60) % 60);
-    const hours = Math.floor(( elapsed / 1000 / 60 / 60 ) % 24);
+export const renderElapsed = (elapsed, runningSince) => {
+    let totalSpend = elapsed;
+    if(runningSince) { 
+        totalSpend += Date.now() - runningSince;
+    }
+    return formatMilliseconds(totalSpend);
+}
+
+export const formatMilliseconds = milliseconds => {
+    const seconds = Math.floor(( milliseconds / 1000 ) % 60);
+    const minutes = Math.floor(( milliseconds / 1000 / 60) % 60);
+    const hours = Math.floor(( milliseconds / 1000 / 60 / 60 ) % 24);
 
     return [
         hours.toString().padStart(2, '0'),
