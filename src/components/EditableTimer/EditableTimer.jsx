@@ -50,6 +50,8 @@ const EditableTimer = props => {
                 runningSince = { props.runningSince }
                 onEditClick = { handleEditClick }
                 onTrashClick = { props.onTrashClick }
+                onStartClick = { props.onStartClick }
+                onStopClick = { props.onStopClick }
             />
         );
     }
