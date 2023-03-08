@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useState, useEffect }  from "react";
 import * as helpers from '../../helpers/helpers';
 
+const useForceUpdate = () => {
+    const [value, setValue] = useState(0);
+    return () => setValue( value => value + 1 );
+}
+
 const Timer = props => {
-    const elapsedString = helpers.renderElapsed(props.elapsed);
+    const forceUpdate = useForceUpdate();
+    const elapsedString = helpers.renderElapsed(props.elapsed, props.runningSince);
+
+    useEffect(() => {
+        let forceUpdateInterval = setInterval(forceUpdate, 50);
+        return () => {
+            clearInterval(forceUpdateInterval);
+        };
+    }, []);
 
     const handleTrashClick = () => {
         props.onTrashClick(props.id);
