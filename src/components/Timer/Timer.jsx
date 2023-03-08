@@ -1,5 +1,6 @@
 import React, { useState, useEffect }  from "react";
 import * as helpers from '../../helpers/helpers';
+import TimerActionButton from "../TimerActionButton/TimerActionButton";
 
 const useForceUpdate = () => {
     const [value, setValue] = useState(0);
@@ -19,6 +20,14 @@ const Timer = props => {
 
     const handleTrashClick = () => {
         props.onTrashClick(props.id);
+    };
+
+    const handleStartClick = () => {
+        props.onStartClick(props.id);
+    };
+
+    const handleStopClick = () => {
+        props.onStopClick(props.id);
     };
 
     return(
@@ -44,9 +53,11 @@ const Timer = props => {
                     </span>
                 </div>
             </div>
-            <div className="ui bottom attached blue basic button">
-                Start
-            </div>
+            <TimerActionButton  
+                timerIsRunning={ !!props.runningSince }
+                onStartClick={ handleStartClick }
+                onStopClick={ handleStopClick }
+            />
         </div>
     );
 }
