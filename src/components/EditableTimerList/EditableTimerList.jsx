@@ -8,8 +8,8 @@ const EditableTimerList = props => {
                 props.timers.map((timer) => {
                     return(
                         <EditableTimer 
-                            key = { timer.id }
-                            id = { timer.id }
+                            key = { timer._id }
+                            id = { timer._id }
                             title = { timer.title }
                             project = { timer.project }
                             elapsed = { timer.elapsed }
