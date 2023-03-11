@@ -50,5 +50,14 @@ export const stopTimer = id => {
             'Content-Type': 'application/json'
         }
     })
+};
+
+export const deleteTimer = id => {
+    return fetch('/api/delete/' + id, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
 }
 

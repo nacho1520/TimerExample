@@ -49,7 +49,9 @@ const TimersDashboard = () => {
     };
 
     const deleteTimer = timerId => {
-        setTimers( timers.filter(t => t.id !== timerId) );
+        // setTimers( timers.filter(t => t.id !== timerId) );
+        Client.deleteTimer(timerId)
+            .then(loadTimersFromServer);
     };
 
     const handleStartClick = timerId => {
@@ -63,7 +65,7 @@ const TimersDashboard = () => {
     const startTimer = timerId => {
         const now = Date.now();
         Client.startTimer(timerId, { runningSince: now })
-        .then(loadTimersFromServer);
+            .then(loadTimersFromServer);
     };
 
     const stopTimer = timerId => {
