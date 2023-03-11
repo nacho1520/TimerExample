@@ -2,13 +2,18 @@ const { v4: uuidv4 } = require('uuid');
 
 export const renderElapsed = (elapsed, runningSince) => {
     let totalSpend = elapsed;
+    console.log("Elapsed: " + elapsed);
+    console.log("Running Since: " + runningSince);
     if(runningSince) { 
         totalSpend += Date.now() - runningSince;
+        console.log("Date.Now: " + Date.now());
+        console.log("Total Spend: " + totalSpend);
     }
     return formatMilliseconds(totalSpend);
 }
 
 export const formatMilliseconds = milliseconds => {
+    console.log(milliseconds);
     const seconds = Math.floor(( milliseconds / 1000 ) % 60);
     const minutes = Math.floor(( milliseconds / 1000 / 60) % 60);
     const hours = Math.floor(( milliseconds / 1000 / 60 / 60 ) % 24);

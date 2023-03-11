@@ -25,6 +25,9 @@ export const startTimer = (id, data) => {
     console.log(JSON.stringify(data));
     return fetch('/api/update/' + id, {
         method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify(data)
     });
 }; 
