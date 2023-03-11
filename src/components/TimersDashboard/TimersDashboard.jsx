@@ -9,7 +9,7 @@ const TimersDashboard = () => {
 
     useEffect(() => {
         loadTimersFromServer();
-        setInterval(loadTimersFromServer, 5000);
+        setInterval(loadTimersFromServer, 1000);
     }, []);
 
     const loadTimersFromServer = () => {
@@ -32,8 +32,6 @@ const TimersDashboard = () => {
     }
 
     const createTimer = timer => {
-        // const newTimer = helpers.newTimer(timer);
-        // setTimers( timers.concat(newTimer) );
         Client.postTimer({ title: timer.title, project: timer.project });
     };
 
@@ -64,32 +62,24 @@ const TimersDashboard = () => {
 
     const startTimer = timerId => {
         const now = Date.now();
-        // setTimers( timers.map( timer => {
-        //     if(timer.id === timerId) {
-        //         return Object.assign({ }, timer, {
-        //             runningSince: now
-        //         });
-        //     } else {
-        //         return timer;
-        //     }
-        // }));
         Client.startTimer(timerId, { runningSince: now })
         .then(loadTimersFromServer);
     };
 
     const stopTimer = timerId => {
-        const now = Date.now();
-        setTimers( timers.map( timer => {
-            if(timer.id === timerId){
-                const lastElapsed = now - timer.runningSince;
-                return Object.assign({ }, timer, {
-                    elapsed: timer.elapsed + lastElapsed,
-                    runningSince: null
-                })
-            } else {
-                return timer;
-            }
-        }));
+        // const now = Date.now();
+        // setTimers( timers.map( timer => {
+        //     if(timer.id === timerId){
+        //         const lastElapsed = now - timer.runningSince;
+        //         return Object.assign({ }, timer, {
+        //             elapsed: timer.elapsed + lastElapsed,
+        //             runningSince: null
+        //         })
+        //     } else {
+        //         return timer;
+        //     }
+        // }));
+        Client.stopTimer(timerId);
     };
 
     return(

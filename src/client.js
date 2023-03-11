@@ -5,6 +5,17 @@ export const getTimers = success => {
         .then(success);
 };
 
+export const postTimer = (data) => {
+    console.log(JSON.stringify(data));
+    return fetch('/api/add', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+};
+
 export const checkStatus = response => {
     if(response.status >= 200 && response.status < 300) {
         return response;
@@ -32,13 +43,12 @@ export const startTimer = (id, data) => {
     });
 }; 
 
-export const postTimer = (data) => {
-    console.log(JSON.stringify(data));
-    return fetch('/api/add', {
-        method: 'POST',
+export const stopTimer = id => {
+    return fetch('/api/stop/' + id, {
+        method: 'PATCH',
         headers: {
             'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
+        }
     })
 }
+
