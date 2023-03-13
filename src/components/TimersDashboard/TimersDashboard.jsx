@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import EditableTimerList from "../EditableTimerList/EditableTimerList";
 import ToggleableTimerForm from "../ToggleableTimerForm/ToggleableTimerForm";
-import * as helpers from '../../helpers/helpers';
 import * as Client from '../../client';
 
 const TimersDashboard = () => {
@@ -32,24 +31,16 @@ const TimersDashboard = () => {
     }
 
     const createTimer = timer => {
-        Client.postTimer({ title: timer.title, project: timer.project });
+        Client.postTimer({ title: timer.title, project: timer.project })
+            .then(loadTimersFromServer);
     };
 
     const updateTimer = timer => {
-        setTimers( timers.map( t => {
-            if( t.id === timer.id ) { 
-                return Object.assign({ }, t, {
-                    title: timer.title,
-                    project: timer.project
-                });
-            } else {
-                return t;
-            }
-        }));
+        Client.updateTimer(timer.id, { title: timer.title, project: timer.project })
+            .then(loadTimersFromServer);
     };
 
     const deleteTimer = timerId => {
-        // setTimers( timers.filter(t => t.id !== timerId) );
         Client.deleteTimer(timerId)
             .then(loadTimersFromServer);
     };
@@ -69,19 +60,8 @@ const TimersDashboard = () => {
     };
 
     const stopTimer = timerId => {
-        // const now = Date.now();
-        // setTimers( timers.map( timer => {
-        //     if(timer.id === timerId){
-        //         const lastElapsed = now - timer.runningSince;
-        //         return Object.assign({ }, timer, {
-        //             elapsed: timer.elapsed + lastElapsed,
-        //             runningSince: null
-        //         })
-        //     } else {
-        //         return timer;
-        //     }
-        // }));
-        Client.stopTimer(timerId);
+        Client.stopTimer(timerId)
+            .then(loadTimersFromServer);
     };
 
     return(
